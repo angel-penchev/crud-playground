@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=gosho
+      - POSTGRES_PASSWORD=losho
+      - POSTGRES_DB=crud-playground
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
