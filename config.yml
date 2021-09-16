@@ -12,7 +12,7 @@ database:
   password: losho
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost:5432/crud-playground
+  url: jdbc:postgresql://db:5432/crud-playground
 
   # any properties specific to your JDBC driver:
   properties:
