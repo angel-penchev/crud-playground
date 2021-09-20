@@ -2,7 +2,8 @@ package dev.penchev.crudplayground;
 
 import dev.penchev.crudplayground.config.PlaygroundConfiguration;
 import dev.penchev.crudplayground.database.UserDAO;
-import dev.penchev.crudplayground.resourse.UserResource;
+import dev.penchev.crudplayground.resourses.UserResource;
+import dev.penchev.crudplayground.service.UserService;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -32,7 +33,8 @@ public class PlaygroundApplication extends Application<PlaygroundConfiguration> 
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
         final UserDAO userDAO = jdbi.onDemand(UserDAO.class);
-        final UserResource userResource = new UserResource(userDAO);
+        final UserService userService = new UserService(userDAO);
+        final UserResource userResource = new UserResource(userService);
         environment.jersey().register(userResource);
     }
 }

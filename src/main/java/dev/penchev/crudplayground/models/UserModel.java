@@ -1,4 +1,4 @@
-package dev.penchev.crudplayground.user;
+package dev.penchev.crudplayground.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,6 +12,8 @@ public class UserModel {
     @NotNull
     @JsonProperty
     private String name;
+
+    public UserModel() {}
 
     public UserModel(Integer id, String name) {
         this.id = id;
