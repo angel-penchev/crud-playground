@@ -7,17 +7,22 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
+import java.util.UUID;
+
 @RegisterMapper(UserMapper.class)
 public interface UserDAO {
     @SqlQuery("SELECT * FROM users WHERE id = :id")
-    UserModel get(@Bind("id") int id);
+    UserModel getById(@Bind("id") UUID id);
 
-    @SqlUpdate("INSERT INTO users (id, name) VALUES (:id, :name)")
+    @SqlQuery("SELECT * FROM users WHERE username = :username")
+    UserModel getByUsername(@Bind("username") String username);
+
+    @SqlUpdate("INSERT INTO users (id, username, password_hash) VALUES (:id, :username, :password)")
     int insert(@BindBean UserModel user);
 
-    @SqlUpdate("UPDATE users SET name = :name WHERE id =:id")
-    int update(@BindBean UserModel user);
+    @SqlUpdate("UPDATE users SET username = :username, password_hash = :password WHERE id = :userId")
+    int update(@Bind("userId") UUID id, @BindBean UserModel user);
 
     @SqlUpdate("DELETE FROM users WHERE id = :id")
-    int delete(@Bind("id") int id);
+    int delete(@Bind("id") UUID id);
 }

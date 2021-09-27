@@ -2,8 +2,14 @@ package dev.penchev.crudplayground;
 
 import dev.penchev.crudplayground.config.PlaygroundConfiguration;
 import dev.penchev.crudplayground.database.UserDAO;
-import dev.penchev.crudplayground.resourses.UserResource;
+import dev.penchev.crudplayground.filter.AuthenticationFilter;
+import dev.penchev.crudplayground.models.UserModel;
+import dev.penchev.crudplayground.resourse.AuthenticationResource;
+import dev.penchev.crudplayground.resourse.UserResource;
+import dev.penchev.crudplayground.service.AuthenticationService;
 import dev.penchev.crudplayground.service.UserService;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -35,6 +41,12 @@ public class PlaygroundApplication extends Application<PlaygroundConfiguration> 
         final UserDAO userDAO = jdbi.onDemand(UserDAO.class);
         final UserService userService = new UserService(userDAO);
         final UserResource userResource = new UserResource(userService);
+        final AuthenticationService authenticationService = new AuthenticationService(userDAO);
+        final AuthenticationResource authenticationResource = new AuthenticationResource(authenticationService);
+        final AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationService);
+        environment.jersey().register(new AuthDynamicFeature(authenticationFilter));
         environment.jersey().register(userResource);
+        environment.jersey().register(authenticationResource);
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(UserModel.class));
     }
 }

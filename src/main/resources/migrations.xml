@@ -8,11 +8,14 @@
 
     <changeSet id="1" author="angel-penchev">
         <createTable tableName="users">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="uuid" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="password_hash" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
         </createTable>
     </changeSet>
