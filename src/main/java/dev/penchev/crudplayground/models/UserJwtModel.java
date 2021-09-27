@@ -1,7 +1,7 @@
 package dev.penchev.crudplayground.models;
 
 public class UserJwtModel {
-    private String token;
+    private final String token;
 
     public UserJwtModel(String token) {
         this.token = token;
@@ -11,7 +11,4 @@ public class UserJwtModel {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

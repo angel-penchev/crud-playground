@@ -14,14 +14,6 @@ public class UserCredentialsModel implements Principal {
     @JsonProperty
     private String password;
 
-    public UserCredentialsModel() {
-    }
-
-    public UserCredentialsModel(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public String getUsername() {
         return username;
     }

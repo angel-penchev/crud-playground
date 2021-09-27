@@ -1,6 +1,5 @@
 package dev.penchev.crudplayground.core;
 
-import dev.penchev.crudplayground.models.UserJwtModel;
 import dev.penchev.crudplayground.models.UserModel;
 
 import javax.ws.rs.core.SecurityContext;

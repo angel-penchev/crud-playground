@@ -33,11 +33,11 @@ database:
   # the maximum number of connections to keep open
   maxSize: 32
 
-  # whether or not idle connections should be validated
+  # whether idle connections should be validated
   checkConnectionWhileIdle: false
 
   # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
   evictionInterval: 10s
 
-  # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
+  # the minimum amount of time a connection must sit idle in the pool before it is eligible for eviction
   minIdleTime: 1 minute

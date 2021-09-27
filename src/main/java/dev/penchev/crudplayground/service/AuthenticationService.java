@@ -21,8 +21,8 @@ import java.util.Optional;
 public class AuthenticationService implements Authenticator<UserJwtModel, UserModel> {
 
     final private UserDAO userDAO;
-    Algorithm jwtAlgorithm = Algorithm.HMAC256("secret");
-    JWTVerifier jwtVerifier = JWT.require(jwtAlgorithm)
+    final Algorithm jwtAlgorithm = Algorithm.HMAC256("secret");
+    final JWTVerifier jwtVerifier = JWT.require(jwtAlgorithm)
             .withIssuer("auth0")
             .build();
 

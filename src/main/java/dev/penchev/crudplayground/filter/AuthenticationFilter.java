@@ -11,7 +11,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.io.IOException;
 import java.util.Optional;
 
 public class AuthenticationFilter extends AuthFilter<UserJwtModel, UserModel> {
@@ -22,7 +21,7 @@ public class AuthenticationFilter extends AuthFilter<UserJwtModel, UserModel> {
     }
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext) {
         Optional<UserModel> authenticatedUser;
         try {
             String jwt = requestContext

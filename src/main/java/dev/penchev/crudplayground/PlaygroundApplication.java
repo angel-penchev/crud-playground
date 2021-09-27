@@ -35,7 +35,7 @@ public class PlaygroundApplication extends Application<PlaygroundConfiguration> 
     }
 
     @Override
-    public void run(PlaygroundConfiguration configuration, Environment environment) throws Exception {
+    public void run(PlaygroundConfiguration configuration, Environment environment) {
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
         final UserDAO userDAO = jdbi.onDemand(UserDAO.class);

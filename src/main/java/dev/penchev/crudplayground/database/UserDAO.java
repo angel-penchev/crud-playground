@@ -18,11 +18,11 @@ public interface UserDAO {
     UserModel getByUsername(@Bind("username") String username);
 
     @SqlUpdate("INSERT INTO users (id, username, password_hash) VALUES (:id, :username, :password)")
-    int insert(@BindBean UserModel user);
+    void insert(@BindBean UserModel user);
 
     @SqlUpdate("UPDATE users SET username = :username, password_hash = :password WHERE id = :userId")
-    int update(@Bind("userId") UUID id, @BindBean UserModel user);
+    void update(@Bind("userId") UUID id, @BindBean UserModel user);
 
     @SqlUpdate("DELETE FROM users WHERE id = :id")
-    int delete(@Bind("id") UUID id);
+    void delete(@Bind("id") UUID id);
 }
