@@ -12,6 +12,7 @@ public class AuthenticationSecurityContext implements SecurityContext {
     public AuthenticationSecurityContext(UserModel principal, SecurityContext securityContext) {
         this.principal = principal;
         this.securityContext = securityContext;
+        System.out.println(securityContext);
     }
 
     @Override
@@ -20,9 +21,8 @@ public class AuthenticationSecurityContext implements SecurityContext {
     }
 
     @Override
-    public boolean isUserInRole(String s) {
-        // TODO: Fix user roles
-        return true;
+    public boolean isUserInRole(String role) {
+        return role.equals(principal.getRole().name());
     }
 
     @Override

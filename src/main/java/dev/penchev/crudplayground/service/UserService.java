@@ -16,8 +16,12 @@ public class UserService {
         return userDAO.getById(id);
     }
 
-    public UserModel editUser(UUID id, UserModel user) {
-        userDAO.update(id, user);
+    public UserModel editUser(UUID id, UserModel user, boolean allowRoleChange) {
+        if (allowRoleChange) {
+            userDAO.updateWithoutRole(id, user);
+        } else {
+            userDAO.updateWithRole(id, user);
+        }
         return userDAO.getById(id);
     }
 

@@ -16,6 +16,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 
 public class PlaygroundApplication extends Application<PlaygroundConfiguration> {
@@ -48,5 +49,6 @@ public class PlaygroundApplication extends Application<PlaygroundConfiguration> 
         environment.jersey().register(userResource);
         environment.jersey().register(authenticationResource);
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(UserModel.class));
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
     }
 }

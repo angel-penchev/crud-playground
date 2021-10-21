@@ -7,12 +7,17 @@ import dev.penchev.crudplayground.service.AuthenticationService;
 import io.dropwizard.auth.AuthFilter;
 import io.dropwizard.auth.AuthenticationException;
 
+import javax.annotation.Priority;
+import javax.ws.rs.Priorities;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.Optional;
 
+@PreMatching
+@Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter extends AuthFilter<UserJwtModel, UserModel> {
     final AuthenticationService authenticationService;
 
@@ -40,7 +45,6 @@ public class AuthenticationFilter extends AuthFilter<UserJwtModel, UserModel> {
                     requestContext.getSecurityContext()
             );
             requestContext.setSecurityContext(securityContext);
-            System.out.println(requestContext.getSecurityContext());
         } else {
             throw new WebApplicationException("Credentials are not valid.", Response.Status.UNAUTHORIZED);
         }

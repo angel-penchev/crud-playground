@@ -11,13 +11,15 @@ public class UserModel implements Principal {
     private UUID id;
     private String username;
     private String password;
+    private Role role;
 
     public UserModel() {}
 
-    public UserModel(UUID id, String username, String password) {
+    public UserModel(UUID id, String username, String password, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     @JsonCreator
@@ -40,6 +42,10 @@ public class UserModel implements Principal {
 
     public String getPassword() {
         return password;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     @Override

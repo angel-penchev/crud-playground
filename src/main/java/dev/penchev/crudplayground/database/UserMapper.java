@@ -1,5 +1,6 @@
 package dev.penchev.crudplayground.database;
 
+import dev.penchev.crudplayground.models.Role;
 import dev.penchev.crudplayground.models.UserModel;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
@@ -13,7 +14,8 @@ public class UserMapper implements ResultSetMapper<UserModel> {
         return new UserModel(
                 UUID.fromString(resultSet.getString("id")),
                 resultSet.getString("username"),
-                resultSet.getString("password_hash")
+                resultSet.getString("password_hash"),
+                Role.valueOf(resultSet.getString("role"))
         );
     }
 }

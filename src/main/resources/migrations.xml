@@ -7,6 +7,7 @@
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="1" author="angel-penchev">
+        <sql>CREATE TYPE roles_enum AS ENUM ('administrator','moderator','regular')</sql>
         <createTable tableName="users">
             <column name="id" type="uuid" >
                 <constraints primaryKey="true" nullable="false"/>
@@ -15,6 +16,9 @@
                 <constraints nullable="false" unique="true" />
             </column>
             <column name="password_hash" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="role" type="roles_enum">
                 <constraints nullable="false" />
             </column>
         </createTable>
